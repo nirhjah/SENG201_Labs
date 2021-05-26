@@ -32,16 +32,5 @@ public class Planet {
 		
 	}
 	
-	public static void main(String[] args) {
-		Earth earth = new Earth();
-		System.out.println(earth instanceof Planet);
-		System.out.println(earth);
-		System.out.println(earth.home());
-		
-		
-	}
-	
-	
-	
 
 }
