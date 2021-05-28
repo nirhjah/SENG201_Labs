@@ -33,7 +33,7 @@ public class Setup {
 	}
 	
 	public void finishedWindow() {
-		manager.closeSetupScreen(this);
+		manager.closeSetup(this);
 	}
 	
 
@@ -165,7 +165,7 @@ public class Setup {
 		JButton btnAccept = new JButton("Accept");
 		btnAccept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				finishedWindow();
+				manager.launchMainScreen();
 			}
 		});
 		btnAccept.setBounds(473, 405, 89, 23);

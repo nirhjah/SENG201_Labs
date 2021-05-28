@@ -23,7 +23,6 @@ public class RocketManager {
 		RocketList = newList;
 	}
 	
-	
 	public void launchMainScreen() {
 		MainScreen mainWindow = new MainScreen(this);
 	}
@@ -32,20 +31,21 @@ public class RocketManager {
 		mainWindow.closeWindow();
 	}
 	
-	public void launchSetupScreen() {
+	public void launchSetup() {
 		Setup setupWindow = new Setup(this);
 	}
 	
-	public void closeSetupScreen(Setup setupWindow) {
+	public void closeSetup(Setup setupWindow) {
 		setupWindow.closeWindow();
 		launchMainScreen();
 	}
 	
 	
+	
 
 	public static void main(String[] args) {
 		RocketManager manager = new RocketManager();
-		manager.launchSetupScreen();
+		manager.launchSetup();
 
 	}
 
