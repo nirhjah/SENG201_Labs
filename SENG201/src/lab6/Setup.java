@@ -8,21 +8,52 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JSlider;
 import javax.swing.JScrollBar;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
 
 public class Setup {
 
 	private JFrame window;
 	private JTextField textName;
 	private RocketManager manager;
-	
+	private MainScreen mainscreen;
+	public Rocket rocket;
+	private ArrayList<Rocket> rockets = new ArrayList<>();
+	ArrayList<Rocket> chosenRockets = new ArrayList<>();
+	JLabel lblNameRocket = new JLabel("Name:");
+	JLabel lblFuel = new JLabel("Fuel:");
+	JLabel lblCleanliness = new JLabel("Cleanliness:");
+	DefaultListModel<Rocket> rocketListModel = new DefaultListModel<>();
+
+	JList<Rocket> rocketList = new JList<>(rocketListModel);
+
+
+
+
+
+
+	public ArrayList<Rocket> generateRockets(){
+		rockets.add(new Rocket("Falcon 9", "Full", "Clean"));
+		rockets.add(new Rocket("Orbiter", "Full", "Clean"));
+		rockets.add(new Rocket("Transformer", "Full", "Clean"));
+		rockets.add(new Rocket("Generator Z", "Full", "Clean"));
+		rockets.add(new Rocket("Cranium", "Full", "Clean"));
+		rockets.add(new Rocket("Eclipser", "Full", "Clean"));
+		return rockets;
+
+
+	}
 	
 	public Setup(RocketManager incomingManager) {
-		manager = incomingManager;
+		this.manager = incomingManager;
 		initialize();
 		window.setVisible(true);
 	}
@@ -96,30 +127,6 @@ public class Setup {
 		slider.setBounds(323, 85, 239, 14);
 		window.getContentPane().add(slider);
 		
-		JButton btnRocket1 = new JButton("Rocket 1");
-		btnRocket1.setBounds(10, 165, 89, 63);
-		window.getContentPane().add(btnRocket1);
-		
-		JButton btnRocket2 = new JButton("Rocket 2");
-		btnRocket2.setBounds(107, 165, 89, 63);
-		window.getContentPane().add(btnRocket2);
-		
-		JButton btnRocket3 = new JButton("Rocket 3");
-		btnRocket3.setBounds(206, 165, 89, 63);
-		window.getContentPane().add(btnRocket3);
-		
-		JButton btnRocket4 = new JButton("Rocket 4");
-		btnRocket4.setBounds(10, 239, 89, 63);
-		window.getContentPane().add(btnRocket4);
-		
-		JButton btnRocket5 = new JButton("Rocket 5");
-		btnRocket5.setBounds(107, 239, 89, 63);
-		window.getContentPane().add(btnRocket5);
-		
-		JButton btnRocket6 = new JButton("Rocket 6");
-		btnRocket6.setBounds(206, 239, 89, 63);
-		window.getContentPane().add(btnRocket6);
-		
 		JLabel lblSelectYourRockets = new JLabel("Select your rockets!");
 		lblSelectYourRockets.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblSelectYourRockets.setBounds(10, 140, 239, 14);
@@ -130,45 +137,68 @@ public class Setup {
 		lblSelectedRockets.setBounds(10, 328, 239, 14);
 		window.getContentPane().add(lblSelectedRockets);
 		
-		JButton btnSelectedRocket1 = new JButton("Rocket5");
-		btnSelectedRocket1.setBounds(10, 365, 89, 63);
-		window.getContentPane().add(btnSelectedRocket1);
-		
-		JButton btnSelectedRocket2 = new JButton("Rocket 3");
-		btnSelectedRocket2.setBounds(107, 365, 89, 63);
-		window.getContentPane().add(btnSelectedRocket2);
-		
-		JButton btnSelectedRocket3 = new JButton("");
-		btnSelectedRocket3.setBounds(206, 365, 89, 63);
-		window.getContentPane().add(btnSelectedRocket3);
-		
 		JLabel lblRocketStats = new JLabel("Rocket Stats");
 		lblRocketStats.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblRocketStats.setBounds(419, 167, 94, 14);
 		window.getContentPane().add(lblRocketStats);
 		
-		JLabel lblNameRocket = new JLabel("Name:");
+		//JLabel lblNameRocket = new JLabel("Name:");
 		lblNameRocket.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNameRocket.setBounds(323, 205, 65, 14);
 		window.getContentPane().add(lblNameRocket);
 		
-		JLabel lblFuel = new JLabel("Fuel:");
+		//JLabel lblFuel = new JLabel("Fuel:");
 		lblFuel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblFuel.setBounds(323, 245, 40, 14);
 		window.getContentPane().add(lblFuel);
 		
-		JLabel lblCleanliness = new JLabel("Cleanliness:");
+		//JLabel lblCleanliness = new JLabel("Cleanliness:");
 		lblCleanliness.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCleanliness.setBounds(323, 288, 89, 14);
 		window.getContentPane().add(lblCleanliness);
 		
+		//DefaultListModel<Rocket> rocketListModel = new DefaultListModel<>();
+		rocketListModel.addAll(generateRockets());
+				
+		//JList<Rocket> rocketList = new JList<>(rocketListModel);
+		rocketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		rocketList.setBounds(16, 169, 233, 148);
+		window.getContentPane().add(rocketList);
+		
+	
+		
+		
+		
 		JButton btnAccept = new JButton("Accept");
 		btnAccept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				manager.setName(textName.getText());
+				manager.setRocketList(chosenRockets);
+
+
 				manager.launchMainScreen();
+				closeWindow();
+				
 			}
 		});
 		btnAccept.setBounds(473, 405, 89, 23);
 		window.getContentPane().add(btnAccept);
+		
+		
+		
+
+
 	}
+	
+	public void valueChanged(ListSelectionEvent e)
+    {
+	lblNameRocket.setText("Name: " + rocketList.getSelectedValue().getRocketName());
+	lblFuel.setText("Fuel: " + rocketList.getSelectedValue().getFuel());
+	lblCleanliness.setText("Cleanliness: " + rocketList.getSelectedValue().getCleanliness());
+         
+    }
+	
+	
+	 
+	
 }

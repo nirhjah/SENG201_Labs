@@ -61,16 +61,16 @@ public class MainScreen {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JLabel lblHello = new JLabel("Hello Starman!");
+		JLabel lblHello = new JLabel("Hello, " + manager.getName());
 		lblHello.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblHello.setBounds(10, 11, 239, 14);
 		window.getContentPane().add(lblHello);
 		
-		JButton btnChosen1 = new JButton("Rocket 5");
+		JButton btnChosen1 = new JButton("");
 		btnChosen1.setBounds(23, 70, 166, 145);
 		window.getContentPane().add(btnChosen1);
 		
-		JButton btnChosen2 = new JButton("Rocket 2");
+		JButton btnChosen2 = new JButton("");
 		btnChosen2.setBounds(226, 70, 166, 145);
 		window.getContentPane().add(btnChosen2);
 		
