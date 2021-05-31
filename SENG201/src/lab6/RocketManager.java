@@ -6,6 +6,7 @@ public class RocketManager {
 	
 	String name;
 	ArrayList<Rocket> RocketList = new ArrayList<Rocket>();
+	Rocket currentRocket;
 	
 	public String getName() {
 		return name;
@@ -21,6 +22,15 @@ public class RocketManager {
 	
 	public void setRocketList (ArrayList<Rocket> newList) {
 		RocketList = newList;
+	}
+	
+	
+	public void setCurrentRocket(Rocket rocket) {
+		currentRocket = rocket; 
+	}
+	
+	public Rocket getCurrentRocket() {
+		return currentRocket;
 	}
 	
 	public void launchMainScreen() {
