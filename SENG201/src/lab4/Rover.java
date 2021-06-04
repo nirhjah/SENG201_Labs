@@ -1,6 +1,6 @@
 package lab4;
 
-public class Rover {
+public class Rover implements RemoteControllable{
 	
 	private double longitude;
 	private double latitude;
